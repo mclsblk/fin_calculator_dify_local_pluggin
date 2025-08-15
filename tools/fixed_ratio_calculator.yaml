@@ -1,0 +1,90 @@
+identity:
+  name: "fixed_ratio_calculator"
+  author: "lmc"
+  label:
+    en_US: "fixed_ratio_calculator"
+    zh_Hans: "固定比例计算器"
+    pt_BR: "calculadora de proporção fixa"
+description:
+  human:
+    en_US: "calculate required asset amount with given ratio"
+    zh_Hans: "根据给定比例计算所需资产数量"
+    pt_BR: "calcular o aporte de ativos necessário com a proporção dada"
+  llm: "Calculate the required asset amount or liability reduction needed to achieve a specific target guarantee ratio (assets/liabilities). This tool determines what financial adjustments are needed to reach the desired ratio through various operation types."
+  
+parameters:
+  - name: expected_ratio
+    type: number
+    required: true
+    label:
+      en_US: "Expected Ratio"
+      zh_Hans: "期望比例"
+      pt_BR: "Proporção Esperada"
+    human_description:
+      en_US: "The expected guarantee ratio, e.g. 0.5 for 50%."
+      zh_Hans: "期望的担保比例，例如 0.5 表示 50%。"
+      pt_BR: "A proporção de garantia esperada, por exemplo, 0,5 para 50%."
+    llm_description: "The target guarantee ratio to achieve, expressed as a decimal number. This parameter is named 'expected_ratio'. For example: 1.5 means assets should be 1.5 times the liabilities, 2.0 means assets should be double the liabilities. Must be a positive number."
+    form: form
+
+  - name: current_assets
+    type: number
+    required: true
+    label:
+      en_US: "Current Assets"
+      zh_Hans: "当前资产"
+      pt_BR: "Ativos Atuais"
+    human_description:
+      en_US: "The total value of current assets."
+      zh_Hans: "当前资产的总价值。"
+      pt_BR: "O valor total dos ativos atuais."
+    llm_description: "The current total asset value before any adjustments. This parameter is named 'current_assets' and must be a positive number representing the existing asset balance."
+    form: form
+
+  - name: current_liabilities
+    type: number
+    required: true
+    label:
+      en_US: "Current Liabilities"
+      zh_Hans: "当前负债"
+      pt_BR: "Passivos Atuais"
+    human_description:
+      en_US: "The total value of current liabilities."
+      zh_Hans: "当前负债的总价值。"
+      pt_BR: "O valor total dos passivos atuais."
+    llm_description: "The current total liability value. This parameter is named 'current_liabilities' and must be a positive number representing the existing debt or obligations."
+    form: form
+
+  - name: type
+    type: select
+    required: true
+    label:
+      en_US: "Type"
+      zh_Hans: "类型"
+      pt_BR: "Tipo"
+    options:
+      - value: "asset_in"
+        label:
+          en_US: "add investment"
+          zh_Hans: "增加投资"
+          pt_BR: "adicionar investimento"
+      - value: "liability_out"
+        label:
+          en_US: "reduce liability (with current assets)"
+          zh_Hans: "减少负债（使用当前资产）"
+          pt_BR: "reduzir passivo (com ativos atuais)"
+      - value: "pay_debt"
+        label:
+          en_US: "pay debt"
+          zh_Hans: "偿还债务"
+          pt_BR: "pagar dívida"
+    llm_description: "The method to achieve the expected ratio. This parameter is named 'type' and must be one of three string values: 'asset_in' (calculate how much additional assets need to be added), 'pay_debt' (calculate how much debt needs to be paid off to reduce liabilities), or 'liability_out' (calculate how much liability should be reduced using current assets). Choose based on the desired approach to reach the target ratio."
+    human_description:
+      en_US: "Type of operation to achieve the expected ratio."
+      zh_Hans: "实现预期比例的操作类型。"
+      pt_BR: "Tipo de operação para alcançar a proporção esperada."
+    form: form
+
+extra:
+  python:
+    source: tools/fixed_ratio_calculator.py

@@ -1,0 +1,99 @@
+identity:
+  name: "withdraw_calculator"
+  author: "lmc"
+  label:
+    en_US: "withdraw_calculator"
+    zh_Hans: "提取资金计算器"
+    pt_BR: "calculadora_de_retirada"
+description:
+  human:
+    en_US: "calculate withdrawal amount or new ratio after withdrawal"
+    zh_Hans: "计算提取资金数量或提取后的新比例"
+    pt_BR: "calcular o valor de retirada ou nova proporção após retirada"
+  llm: "Calculate either the new guarantee ratio after withdrawing a specific amount, or determine the maximum amount that can be withdrawn while maintaining a target ratio. This tool handles withdrawal scenarios and their impact on financial ratios."
+  
+parameters:
+  - name: current_assets
+    type: number
+    required: true
+    label:
+      en_US: "Current Assets"
+      zh_Hans: "当前资产"
+      pt_BR: "Ativos Atuais"
+    human_description:
+      en_US: "The total value of current assets."
+      zh_Hans: "当前资产的总价值。"
+      pt_BR: "O valor total dos ativos atuais."
+    llm_description: "The current total asset value before withdrawal. This parameter is named 'current_assets' and must be a positive number representing the existing asset balance from which withdrawals will be made."
+    form: form
+
+  - name: current_liabilities
+    type: number
+    required: true
+    label:
+      en_US: "Current Liabilities"
+      zh_Hans: "当前负债"
+      pt_BR: "Passivos Atuais"
+    human_description:
+      en_US: "The total value of current liabilities."
+      zh_Hans: "当前负债的总价值。"
+      pt_BR: "O valor total dos passivos atuais."
+    llm_description: "The current total liability value. This parameter is named 'current_liabilities' and must be a positive number representing the existing debt or obligations that remain constant during withdrawal calculations."
+    form: form
+
+  - name: calculation_type
+    type: select
+    required: true
+    label:
+      en_US: "Calculation Type"
+      zh_Hans: "计算类型"
+      pt_BR: "Tipo de Cálculo"
+    options:
+      - value: "calculate_new_ratio"
+        label:
+          en_US: "Calculate new ratio after withdrawal"
+          zh_Hans: "计算提取后的新比例"
+          pt_BR: "Calcular nova proporção após retirada"
+      - value: "calculate_withdrawable_amount"
+        label:
+          en_US: "Calculate maximum withdrawable amount"
+          zh_Hans: "计算最大可提取金额"
+          pt_BR: "Calcular valor máximo de retirada"
+    llm_description: "The type of calculation to perform. This parameter is named 'calculation_type' and must be one of two string values: 'calculate_new_ratio' (calculate what the new ratio will be after withdrawing a specific amount - requires withdrawal_amount parameter), or 'calculate_withdrawable_amount' (calculate the maximum amount that can be withdrawn while maintaining a target ratio - requires target_ratio parameter)."
+    human_description:
+      en_US: "Choose whether to calculate new ratio after withdrawal or maximum withdrawable amount."
+      zh_Hans: "选择计算提取后的新比例还是最大可提取金额。"
+      pt_BR: "Escolha se calcular nova proporção após retirada ou valor máximo de retirada."
+    form: form
+
+  - name: withdrawal_amount
+    type: number
+    required: false
+    label:
+      en_US: "Withdrawal Amount"
+      zh_Hans: "提取金额"
+      pt_BR: "Valor de Retirada"
+    human_description:
+      en_US: "The amount to withdraw (required when calculating new ratio)."
+      zh_Hans: "要提取的金额（计算新比例时必需）。"
+      pt_BR: "O valor a ser retirado (necessário ao calcular nova proporção)."
+    llm_description: "The specific amount to withdraw from assets. This parameter is named 'withdrawal_amount' and is required only when calculation_type is 'calculate_new_ratio'. Must be a positive number less than or equal to current_assets. Leave empty when using 'calculate_withdrawable_amount' mode."
+    form: form
+
+  - name: target_ratio
+    type: number
+    required: false
+    label:
+      en_US: "Target Ratio"
+      zh_Hans: "目标比例"
+      pt_BR: "Proporção Alvo"
+    human_description:
+      en_US: "The expected ratio after withdrawal."
+      zh_Hans: "提取后的期望比例。"
+      pt_BR: "A proporção esperada após a retirada."
+    llm_description: "The target guarantee ratio to maintain after withdrawal. This parameter is named 'target_ratio' and is required only when calculation_type is 'calculate_withdrawable_amount'. Must be a positive number greater than 0. For example: 1.5 means assets should be 1.5 times the liabilities after withdrawal."
+    form: form
+
+extra:
+  python:
+    source: tools/withdraw_calculator.py
