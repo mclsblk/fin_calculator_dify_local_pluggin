@@ -25,7 +25,7 @@ parameters:
       zh_Hans: "给定的资产数量，例如 100000 表示 100,000。"
       pt_BR: "A quantidade de ativos dada, por exemplo, 100000 para 100.000."
     llm_description: "The specific asset amount to be used in the calculation. This parameter is named 'asset_input' and should be a positive number representing the monetary value (e.g., 100000 for $100,000). This amount will be applied according to the selected operation type."
-    form: form
+    form: llm
 
   - name: current_assets
     type: number
@@ -39,7 +39,7 @@ parameters:
       zh_Hans: "当前资产的总价值。"
       pt_BR: "O valor total dos ativos atuais."
     llm_description: "The current total asset value before any changes. This parameter is named 'current_assets' and must be a positive number representing the existing asset balance."
-    form: form
+    form: llm
 
   - name: current_liabilities
     type: number
@@ -53,7 +53,7 @@ parameters:
       zh_Hans: "当前负债的总价值。"
       pt_BR: "O valor total dos passivos atuais."
     llm_description: "The current total liability value. This parameter is named 'current_liabilities' and must be a positive number representing the existing debt or obligations."
-    form: form
+    form: llm
 
   - name: type
     type: select
@@ -83,7 +83,7 @@ parameters:
       en_US: "Type of operation applied to the given asset amount."
       zh_Hans: "应用于给定资产金额的操作类型。"
       pt_BR: "Tipo de operação aplicada à quantidade de ativos dada."
-    form: form
+    form: llm
 
 extra:
   python:

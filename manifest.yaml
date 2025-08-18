@@ -1,7 +1,7 @@
-version: 0.0.1
+version: 0.0.2
 type: plugin
 author: lmc
-name: 担保资产计算器
+name: fin_calculator
 label:
   en_US: fin_calculator
   zh_Hans: 担保资产计算器

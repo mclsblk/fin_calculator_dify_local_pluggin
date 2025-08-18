@@ -25,7 +25,7 @@ parameters:
       zh_Hans: "期望的担保比例，例如 0.5 表示 50%。"
       pt_BR: "A proporção de garantia esperada, por exemplo, 0,5 para 50%."
     llm_description: "The target guarantee ratio to achieve, expressed as a decimal number. This parameter is named 'expected_ratio'. For example: 1.5 means assets should be 1.5 times the liabilities, 2.0 means assets should be double the liabilities. Must be a positive number."
-    form: form
+    form: llm
 
   - name: current_assets
     type: number
@@ -39,7 +39,7 @@ parameters:
       zh_Hans: "当前资产的总价值。"
       pt_BR: "O valor total dos ativos atuais."
     llm_description: "The current total asset value before any adjustments. This parameter is named 'current_assets' and must be a positive number representing the existing asset balance."
-    form: form
+    form: llm
 
   - name: current_liabilities
     type: number
@@ -53,7 +53,7 @@ parameters:
       zh_Hans: "当前负债的总价值。"
       pt_BR: "O valor total dos passivos atuais."
     llm_description: "The current total liability value. This parameter is named 'current_liabilities' and must be a positive number representing the existing debt or obligations."
-    form: form
+    form: llm
 
   - name: type
     type: select
@@ -83,7 +83,7 @@ parameters:
       en_US: "Type of operation to achieve the expected ratio."
       zh_Hans: "实现预期比例的操作类型。"
       pt_BR: "Tipo de operação para alcançar a proporção esperada."
-    form: form
+    form: llm
 
 extra:
   python:

@@ -1,7 +1,7 @@
 # 金融担保资产计算器 - Dify插件
 
 **Author:** lmc  
-**Version:** 0.0.1  
+**Version:** 0.0.2
 **Type:** tool  
 
 [![Python Version](https://img.shields.io/badge/python-3.12-blue.svg)](https://python.org)
@@ -20,6 +20,10 @@
 
 ## 提示
 该项目尚未发布于dify marketplace，若要安装使用，请于pull源代码之后，参考dify文档插件开发部分进行打包，再上传至dify中完成安装。项目中可能会随时遇到奇异bug或不完善之处，欢迎随时提出。
+
+### 已知问题
+- llm使用时不识别参数
+- marketplace展示时不展示参数及其描述
 
 ## 📚 使用说明
 
@@ -88,6 +92,9 @@
   "withdrawal_amount": 25000
 }
 ```
+### 提示
+当LLM无法正确理解或处理参数时，可以在您的提示词中添加[参数示例](./parameter_examples.md)文件中的示例来辅助模型推理。这些示例提供了标准格式的参数输入，有助于模型更准确地理解您的需求。
+
 
 ## 🔧 技术详情
 
@@ -121,7 +128,12 @@ fin_calculator/
 ### v0.0.1 (2025-08-15)
 - 初始版本
 - 实现计算器功能
-- 完善参数验证和错误处理
+- 完善错误处理
+
+### v0.0.2 (2025-08-17)
+- 修复参数不显示问题
+- 修复llm对description不可见问题
+- 完善描述
 
 
 ## 📝 许可证
