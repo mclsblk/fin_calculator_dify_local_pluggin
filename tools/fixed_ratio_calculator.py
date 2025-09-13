@@ -28,10 +28,7 @@ class FixedRatioCalculatorTool(Tool):
                 "error": "Current assets must be non-negative, current liabilities and expected ratio must be positive."
             })
             return
-            
-        # 计算当前比例
-        current_ratio = current_assets / current_liabilities
-        
+      
         if type_of_method == "asset_in":
             # 增加投资以达到期望比例
             required_assets = current_liabilities * expected_ratio
@@ -39,7 +36,6 @@ class FixedRatioCalculatorTool(Tool):
             
             if additional_assets_needed <= 0:
                 yield self.create_json_message({
-                    "current_ratio": round(current_ratio, 4),
                     "expected_ratio": expected_ratio,
                     "additional_assets_needed": 0,
                     "message": "Current ratio already meets or exceeds the expected ratio. No additional investment needed.",
@@ -47,7 +43,6 @@ class FixedRatioCalculatorTool(Tool):
                 })
             else:
                 yield self.create_json_message({
-                    "current_ratio": round(current_ratio, 4),
                     "expected_ratio": expected_ratio,
                     "additional_assets_needed": round(additional_assets_needed, 2),
                     "calculation_type": "asset_addition"
@@ -59,16 +54,13 @@ class FixedRatioCalculatorTool(Tool):
             debt_to_pay = current_liabilities - required_liabilities
             
             if debt_to_pay <= 0:
-                yield self.create_json_message({
-                    "current_ratio": round(current_ratio, 4),
-                    "expected_ratio": expected_ratio,
+                yield self.create_json_message({                    "expected_ratio": expected_ratio,
                     "debt_to_pay": 0,
                     "message": "Current ratio already meets or exceeds the expected ratio. No debt payment needed.",
                     "calculation_type": "debt_payment"
                 })
             else:
                 yield self.create_json_message({
-                    "current_ratio": round(current_ratio, 4),
                     "expected_ratio": expected_ratio,
                     "debt_to_pay": round(debt_to_pay, 2),
                     "calculation_type": "debt_payment"
@@ -82,7 +74,6 @@ class FixedRatioCalculatorTool(Tool):
 
             if liability_reduction <= 0:
                 yield self.create_json_message({
-                    "current_ratio": round(current_ratio, 4),
                     "expected_ratio": expected_ratio,
                     "liability_reduction_needed": 0,
                     "message": "Current ratio already meets or exceeds the expected ratio. No liability reduction needed.",
@@ -95,7 +86,6 @@ class FixedRatioCalculatorTool(Tool):
                 return
             else:
                 yield self.create_json_message({
-                    "current_ratio": round(current_ratio, 4),
                     "expected_ratio": expected_ratio,
                     "liability_reduction_needed": round(liability_reduction, 2),
                     "calculation_type": "liability_reduction"
